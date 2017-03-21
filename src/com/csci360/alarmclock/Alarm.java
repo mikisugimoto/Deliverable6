@@ -17,7 +17,7 @@ public class Alarm {
     
     //if false play radio
     //if true play default alarm
-    private Boolean playAlarm = true;
+    private Boolean playStockAlert = true;
     
     
     private String getCurrentTime(){
@@ -47,11 +47,11 @@ public class Alarm {
     }
     
     public Boolean willPlayAlarm(){
-        return playAlarm;
+        return playStockAlert;
     }
     
-    public void setAlert(Boolean pA){
-        this.playAlarm = pA;
+    public void setStockAlert(Boolean pA){
+        this.playStockAlert = pA;
     }
     
     public Boolean shouldSoundAlert(){
