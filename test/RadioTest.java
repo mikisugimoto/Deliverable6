@@ -4,11 +4,11 @@
  * and open the template in the editor.
  */
 
+import com.csci360.alarmclock.RadioController;
 import org.junit.After;
-import org.junit.AfterClass;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+
 import static org.junit.Assert.*;
 
 /**
@@ -16,29 +16,55 @@ import static org.junit.Assert.*;
  * @author benjaminmuldrow
  */
 public class RadioTest {
-    
+
+    private RadioController radioController;
+
     public RadioTest() {
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
+
     @Before
     public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
+        // create a RadioController with valid Radio params
+        this.radioController = new RadioController(1.0, 89.9, "fm");
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
+    @After
+    public void tearDown() {
+        this.radioController.stop();
+    }
+
+    @Test
+    public void testVolume() {
+
+        // Test Invalid Volume
+        this.radioController.setVolume(99);
+        assertEquals("Invalid volume must be rejected and replaced"
+                    +"with default or last valid entry",
+                    1.0, this.radioController.getVolume(), 0.01);
+
+        // Test Valid Volume
+        this.radioController.setVolume(0.8);
+        assertEquals("Valid volume should be set", 0.8,
+                    this.radioController.getVolume(), 0.01);
+    }
+
+    @Test
+    public void testFrequency() {
+
+        // Test Invalid Frequency according to tuning
+        this.radioController.setFrequency(1000);
+        assertEquals("Invalid frequency for FM tuning",
+                    89.9, this.radioController.getFrequency(), 0.01);
+
+        // Test toggle tuning
+        this.radioController.toggleTuning();
+        assertTrue("Tuning toggle should change the tuning string",
+                    this.radioController.getTuning().equals("am"));
+
+        // Test valid frequency according to tuning
+        this.radioController.setFrequency(1000);
+        assertEquals("Setting a valid frequency according to tuning",
+                    1000, this.radioController.getFrequency(), 0.01);
+
+    }
 }
