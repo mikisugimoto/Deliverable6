@@ -16,8 +16,8 @@ public class RadioController {
     public RadioController(double vol, double freq, String tune) {
 
         // default values
-        double volume = 1.0;
-        double frequency = 88.0;
+        double volume = Radio.MAX_VOL;
+        double frequency = Radio.MIN_FM;
         String tuning = "fm";
 
         // check validity
@@ -49,9 +49,9 @@ public class RadioController {
     // check if frequency is valid aginst current tuning
     private boolean isValidFrequency(double freq, String tuning) {
         if (tuning.equals("am")) {
-            return (freq >= 540 && freq <= 1600);
+            return (freq >= Radio.MIN_AM && freq <= Radio.MAX_AM);
         } else if (tuning.equals("fm")) {
-            return (freq >= 88 && freq <= 108);
+            return (freq >= Radio.MIN_FM && freq <= Radio.MAX_FM);
         } else {
             // invalid tuning
             return false;
@@ -60,7 +60,7 @@ public class RadioController {
 
     // check if volume is between 0 and 1
     private boolean isValidVolume(double vol) {
-        if (vol >= 0 && vol <= 1) {
+        if (vol >= Radio.MIN_VOL && vol <= Radio.MAX_VOL) {
             return true;
         } else {
             return false;

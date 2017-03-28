@@ -1,3 +1,5 @@
+package com.csci360.alarmclock;
+
 import com.csci360.alarmclock.RadioController;
 import org.junit.After;
 import org.junit.Before;

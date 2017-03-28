@@ -6,9 +6,9 @@ import java.util.Calendar;
  *
  * @author Miki
  */
-public class clockView {
+public class ClockView {
     
-    public void viewClock(theClock view) {
+    public void viewClock(Clock view) {
         System.out.println("Current time is " + view.toString());
     }
     
