@@ -14,26 +14,24 @@ public class Clock {
 
     
     Calendar currentTime;
+    Timer timer;
+    SimpleDateFormat sdf;
 
     
     /*
     Clock which is synchronized to the system time
     */
-    public void theClock() {
+    public Clock() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         currentTime = Calendar.getInstance();
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                currentTime.set(Calendar.SECOND, (currentTime.get(Calendar.SECOND) + 5));
+            }
+        }, 5*1000, 5*1000);
     }
-    
-   public void adjustMinutes(int minutes) {
-       currentTime.set(Calendar.MINUTE, minutes);
-       SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-       System.out.println(sdf.format(currentTime.getTime()));
-   }
-    
-   public void adjustHours(int hours){
-       currentTime.set(Calendar.HOUR_OF_DAY, hours);
-       SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-       System.out.println(sdf.format(currentTime.getTime()));
-   }
     
     /*
     Sets clock time to current system time
@@ -42,19 +40,37 @@ public class Clock {
         currentTime = Calendar.getInstance();
     }
     
+    public void setMinutes(int minutes) {
+        currentTime.set(Calendar.MINUTE, minutes);
+        currentTime.getTime();
+    }
+    
+    public void setHours(int hours) {
+        currentTime.set(Calendar.HOUR_OF_DAY, hours);
+        currentTime.getTime();
+    }
+    
     /*
     Returns the time stored in the clock
     */
-    public Calendar getTime() {
-        return currentTime;
+    public int getHours() {
+        return currentTime.get(Calendar.HOUR_OF_DAY);
+    }
+    
+    public int getMinutes() {
+        return currentTime.get(Calendar.MINUTE);
+    }
+    
+    public String getTime() {
+        return sdf.format(currentTime.getTime());
     }
     
     /*
     Returns statement with the current time stored in the clock
     */
     public String toString() {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        return sdf.format(currentTime.getTime());
+        return "The current time is " + sdf.format(currentTime.getTime());
     }
     
 }
+
