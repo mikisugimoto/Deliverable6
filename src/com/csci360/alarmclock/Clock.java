@@ -17,12 +17,10 @@ public class Clock {
     Timer timer;
     SimpleDateFormat sdf;
 
-
     
     /*
     Clock which is synchronized to the system time
     */
-
     public Clock() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         currentTime = Calendar.getInstance();
@@ -35,24 +33,6 @@ public class Clock {
         }, 5*1000, 5*1000);
     }
     
-
-    public void theClock() {
-        currentTime = Calendar.getInstance();
-    }
-    
-   public void adjustMinutes(int minutes) {
-       currentTime.set(Calendar.MINUTE, minutes);
-       SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-       System.out.println(sdf.format(currentTime.getTime()));
-   }
-    
-   public void adjustHours(int hours){
-       currentTime.set(Calendar.HOUR_OF_DAY, hours);
-       SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-       System.out.println(sdf.format(currentTime.getTime()));
-   }
-    
-
     /*
     Sets clock time to current system time
     */
@@ -71,6 +51,7 @@ public class Clock {
         currentTime.getTime();
     }
     
+
     /*
     Returns the time stored in the clock
     */
@@ -85,12 +66,6 @@ public class Clock {
     public String getTime() {
         return sdf.format(currentTime.getTime());
 
-    /*
-    Returns the time stored in the clock
-    */
-    public Calendar getTime() {
-        return currentTime;
-    }
     
     /*
     Returns statement with the current time stored in the clock
@@ -98,12 +73,7 @@ public class Clock {
     public String toString() {
 
         return "The current time is " + sdf.format(currentTime.getTime());
-    }
-    
-}
 
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-        return sdf.format(currentTime.getTime());
     }
     
 }
