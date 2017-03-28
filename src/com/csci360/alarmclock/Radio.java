@@ -8,6 +8,15 @@ public class Radio {
     // Constant values
     public static final double DEFAULT_FM = 88.0;
     public static final double DEFAULT_AM = 540.0;
+    
+    public static final double MAX_FM = 108;
+    public static final double MIN_FM = 88;
+    
+    public static final double MAX_AM = 1600;
+    public static final double MIN_AM = 540;
+    
+    public static final double MAX_VOL = 1.0;
+    public static final double MIN_VOL = 0.0;
 
     // Attributes with default values
     private double volume;

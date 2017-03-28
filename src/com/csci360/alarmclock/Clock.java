@@ -10,7 +10,7 @@ import java.util.*;
  *
  * @author Miki
  */
-public class theClock {
+public class Clock {
 
     
     Calendar currentTime;
