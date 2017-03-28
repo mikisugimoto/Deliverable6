@@ -24,7 +24,7 @@ public class Clock {
     public Clock() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         currentTime = Calendar.getInstance();
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
