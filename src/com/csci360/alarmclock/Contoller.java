@@ -6,9 +6,9 @@
 package com.csci360.alarmclock;
 
 /**
- *
+ * The super controller class
  * @author benjaminmuldrow
  */
-public class AlarmController {
+public class Contoller {
     
 }
