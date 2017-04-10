@@ -90,6 +90,10 @@ public class RadioController {
     public double getVolume() {
         return radio.getVolume();
     }
+    
+    public void play() {
+        radio.playRadio();
+    }
 
     public void stop() {
         radio.stop();

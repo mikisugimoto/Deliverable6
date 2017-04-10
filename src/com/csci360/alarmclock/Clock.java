@@ -24,11 +24,12 @@ public class Clock {
     public Clock() {
         SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
         currentTime = Calendar.getInstance();
-        timer = new Timer();
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
                 currentTime.set(Calendar.SECOND, (currentTime.get(Calendar.SECOND) + 5));
+                System.out.println(sdf.format(currentTime.getTime()));
             }
         }, 5*1000, 5*1000);
     }
@@ -40,7 +41,6 @@ public class Clock {
         currentTime = Calendar.getInstance();
     }
     
-
     public void setMinutes(int minutes) {
         currentTime.set(Calendar.MINUTE, minutes);
         currentTime.getTime();
@@ -51,7 +51,6 @@ public class Clock {
         currentTime.getTime();
     }
     
-
     /*
     Returns the time stored in the clock
     */
@@ -65,15 +64,13 @@ public class Clock {
     
     public String getTime() {
         return sdf.format(currentTime.getTime());
-
+    }
     
     /*
     Returns statement with the current time stored in the clock
     */
     public String toString() {
-
         return "The current time is " + sdf.format(currentTime.getTime());
-
     }
     
 }

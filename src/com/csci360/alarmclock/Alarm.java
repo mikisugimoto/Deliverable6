@@ -5,100 +5,104 @@
  */
 package com.csci360.alarmclock;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
 
 /**
  *
  * @author baldy
  */
 public class Alarm {
-    private String timeOfAlarm;
+    //private String timeOfAlarm;
     
     //if false play radio
     //if true play default alarm
-    private Boolean playStockAlert = true;
+    boolean alarmActive;
+    private Boolean playStockAlert;
+    Calendar currentTime;
+    Calendar timeOfAlarm;
+    SimpleDateFormat sdf;
     
-    
-    private String getCurrentTime(){
-        LocalTime currentTime = LocalTime.now();
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mm a");
-        String text = currentTime.format(format);
-        return text;
+    public Alarm() {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        timeOfAlarm = Calendar.getInstance();
+        timeOfAlarm.set(Calendar.MINUTE, 0);
+        timeOfAlarm.set(Calendar.HOUR_OF_DAY, 0);
+        playStockAlert = true;
+        alarmActive = false;
+        
+
     }
-    // Time must be in the following format 
-    // H:M A 
-    // Where H is any int between 1 & 12 inclusive
-    // Where M is any int between 0 & 59
-    // Where A is either AM or PM
     
+    
+    
+    /*
+    public Calendar getTime() {
+        return currentTime;
+    }
     
     public String getTimeOfAlarm(){
         return timeOfAlarm;
     }
     
     public void setTimeOfAlarm(String t){
-        if(isValidTime(t)){
-            this.timeOfAlarm = t;
-        }
-        else
-            System.out.println("Incorrect Time Format");
         
+            this.timeOfAlarm = t;
+       
+    }
+    */
+    
+    public void setAlarmMinutes(int minutes) {
+        timeOfAlarm.set(Calendar.MINUTE, minutes);
+    }
+ 
+    public void setAlarmHours(int hours) {
+        currentTime.set(Calendar.HOUR_OF_DAY, hours);
     }
     
-    public Boolean willPlayAlarm(){
-        return playStockAlert;
+    public int getAlarmHours() {
+        return timeOfAlarm.get(Calendar.HOUR_OF_DAY);
     }
     
+    public int getAlarmMinutes() {
+        return timeOfAlarm.get(Calendar.MINUTE);
+    }
+    
+    public String getAlarmTime() {
+        return sdf.format(currentTime.getTime());
+    }
+    
+    public void turnOn() {
+        alarmActive = true;
+    }
+    
+    public void turnOff() {
+        alarmActive = false;
+    }
+    
+    public boolean isActive() {
+        return alarmActive;
+    }
+    
+    // set whether alarm will be stock sound or radio
     public void setStockAlert(Boolean pA){
         this.playStockAlert = pA;
     }
     
+    // whether alarm will play stock sound or radio
+    // if true, stock sound, if false, radio
     public Boolean shouldSoundAlert(){
-       return timeOfAlarm.equals(getCurrentTime());
+       return playStockAlert;
     }
     
     public void soundAlert() {
         System.out.println("Wake me up inside");
     }
     
-    public Boolean isValidTime(String time){
-        String delims = "[: ]";
-        String[] toke = time.split(delims);
-        int h = Integer.parseInt(toke[0]);
-        int m = Integer.parseInt(toke[2]);
-        String a = toke[4];
-        
-        if((h>12)||(h<1)){
-            return false;
-        }
-        else if((m>59)||(m<0)){
-            return false;
-        }
-        else if( !a.equals("AM")||!a.equals("PM")){
-            return false;
-        }
-        return true;
-        
-         
-   }
-       public static void main(String[] args) {
-        
-        //String dateOut;
-        //dateOut = LocalDateTime.now().format(format);
-//        LocalDateTime timeUnf = LocalDateTime.now();
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm");
-//        LocalDateTime time = LocalDateTime.parse(timeUnf, formatter);
-        //System.out.println(dateOut);
-//System.out.println(LocalDateTime.now().ofLocalizedTime());
-        // TODO code application logic here
-        String input =  "11:33 p";
-        
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("hh:mm a");
-        LocalTime time = LocalTime.parse(input, format);
-        System.out.println(time);
-        
-
+    public String toString() {
+        return sdf.format(timeOfAlarm.getTime());
     }
     
 }
