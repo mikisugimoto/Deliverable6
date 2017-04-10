@@ -16,19 +16,35 @@ public class ClockController {
     }
     
     public void incrementMinutes() {
-        clock.setMinutes(clock.getMinutes() + 1);
+        if (clock.getMinutes() == 59) {
+            clock.setMinutes(0);
+        } else {
+            clock.setMinutes(clock.getMinutes() + 1);
+        }
     }
     
     public void incrementHours() {
-        clock.setHours(clock.getHours() + 1);
+        if (clock.getHours() == 23) {
+            clock.setHours(0);
+        } else {
+            clock.setHours(clock.getHours() + 1);
+        }
     }
     
     public void decrementMinutes() {
+        if (clock.getMinutes() == 0) {
+            clock.setMinutes(59);
+        } else {
         clock.setMinutes(clock.getMinutes() - 1);
+        }
     }
     
     public void decrementHours() {
-        clock.setHours(clock.getHours() - 1);
+        if (clock.getHours() == 0) {
+            clock.setHours(23);
+        } else {
+            clock.setHours(clock.getHours() - 1);
+        }
     }
     
     public String getCurrentTime() {
